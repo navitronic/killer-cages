@@ -24,12 +24,6 @@ function containsNumbers(arr1: number[], arr2: number[]): boolean {
   return arr1.some((num) => arr2.includes(num));
 }
 
-export function combinations(
-  total: number,
-  size: number,
-  exclusions: number[],
-) {
-  return killerCombinations
-    .filter((n) => !containsNumbers(n, exclusions))
-    .filter((arr) => arr.length === size && totalInArray(arr) === total);
+export function combinations(total: number, size: number, exclusions: number[]) {
+  return killerCombinations.filter((n) => !containsNumbers(n, exclusions)).filter((arr) => arr.length === size && totalInArray(arr) === total);
 }
