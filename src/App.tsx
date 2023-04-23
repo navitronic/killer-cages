@@ -10,8 +10,8 @@ function numStrToArr(excStr: string): number[] {
     .filter((value) => value >= 1 && value <= 9);
 }
 
-function displayCombination(total: number, size: number, inclusions: number[], exclusions: number[], displayAll: boolean) {
-  if (displayAll) {
+function displayCombination(total: number, size: number, inclusions: number[], exclusions: number[], groupNum: boolean) {
+  if (!groupNum) {
     return <CombinationRange total={total} size={size} inclusions={inclusions} exclusions={exclusions} />;
   }
 
@@ -27,7 +27,7 @@ function InnerApp() {
   const displayOptions: DisplayOptions = useContext(DisplayOptionsContext);
 
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    displayOptions.setShowAll(e.target.checked);
+    displayOptions.setGroupNum(e.target.checked);
   };
 
   return (
@@ -54,12 +54,12 @@ function InnerApp() {
         </div>
         <div className="text-base">
           <label>
-            <input type="checkbox" checked={displayOptions.showAll} onChange={handleCheckboxChange} className="mr-1" />
-            Show all numbers
+            <input type="checkbox" checked={displayOptions.groupNum} onChange={handleCheckboxChange} className="mr-1" />
+            Group numbers
           </label>
         </div>
       </div>
-      {displayCombination(total, size, numStrToArr(incStr), numStrToArr(excStr), displayOptions.showAll)}
+      {displayCombination(total, size, numStrToArr(incStr), numStrToArr(excStr), displayOptions.groupNum)}
     </div>
   );
 }

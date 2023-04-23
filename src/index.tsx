@@ -12,9 +12,9 @@ interface AppProps {
 }
 
 const App = ({ children }: AppProps) => {
-  const [showAll, setShowAll] = useState<boolean>(false);
+  const [groupNum, setGroupNum] = useState<boolean>(false);
 
-  return <DisplayOptionsContext.Provider value={{ showAll, setShowAll }}>{children}</DisplayOptionsContext.Provider>;
+  return <DisplayOptionsContext.Provider value={{ groupNum: groupNum, setGroupNum: setGroupNum }}>{children}</DisplayOptionsContext.Provider>;
 };
 
 root.render(
