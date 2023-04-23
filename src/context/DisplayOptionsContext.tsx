@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 export interface DisplayOptions {
   showAll: boolean;
-  setShowAll (value: boolean): void;
+  setShowAll(value: boolean): void;
 }
 
 export const DisplayOptionsContext = createContext<DisplayOptions>({

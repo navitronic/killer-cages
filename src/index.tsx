@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import InnerApp from './App';
 import reportWebVitals from './reportWebVitals';
-import {DisplayOptionsContext} from "./context/DisplayOptionsContext";
+import { DisplayOptionsContext } from './context/DisplayOptionsContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -14,17 +14,13 @@ interface AppProps {
 const App = ({ children }: AppProps) => {
   const [showAll, setShowAll] = useState<boolean>(false);
 
-  return (
-    <DisplayOptionsContext.Provider value={{showAll, setShowAll}}>
-      {children}
-    </DisplayOptionsContext.Provider>
-  )
-}
+  return <DisplayOptionsContext.Provider value={{ showAll, setShowAll }}>{children}</DisplayOptionsContext.Provider>;
+};
 
 root.render(
   <React.StrictMode>
     <App>
-      <InnerApp/>
+      <InnerApp />
     </App>
   </React.StrictMode>,
 );
