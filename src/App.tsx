@@ -2,6 +2,7 @@ import React, { ChangeEvent, useContext, useState } from 'react';
 import { DisplayOptions, DisplayOptionsContext } from './context/DisplayOptionsContext';
 import CombinationRange from './ui/CombinationRange';
 import Combination from './ui/Combination';
+import {AppContext, AppStateContext} from "./context/AppStateContext";
 
 function numStrToArr(excStr: string): number[] {
   return excStr
@@ -18,7 +19,15 @@ function displayCombination(total: number, size: number, inclusions: number[], e
   return <Combination total={total} size={size} inclusions={inclusions} exclusions={exclusions} />;
 }
 
-function InnerApp() {
+export function OuterApp() {
+  const AppState: AppContext = useContext(AppStateContext);
+
+  const { definitions } = AppState.appState;
+
+  return (<>{definitions.map((d, i) => <InnerApp key={`definition-${i}`}/>)}</>);
+}
+
+export function InnerApp() {
   const [total, setTotal] = useState<number>(10);
   const [size, setSize] = useState<number>(3);
   const [incStr, setIncStr] = useState<string>('');
@@ -31,8 +40,7 @@ function InnerApp() {
   };
 
   return (
-    <div className="container mx-auto my-10">
-      <h1 className="text-3xl font-bold mb-10">Killer Cage Calculator 🧮</h1>
+    <div className="auto px-10 my-10">
       <div className="text-3xl mb-20">
         <div>
           <label>
@@ -63,5 +71,3 @@ function InnerApp() {
     </div>
   );
 }
-
-export default InnerApp;

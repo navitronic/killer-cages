@@ -20,15 +20,19 @@ function totalInArray(arr: number[]) {
   return arr.reduce((partialSum, a) => partialSum + a, 0);
 }
 
-function containsNumbers(arr1: number[], arr2: number[]): boolean {
+function containsAnyNumbers(arr1: number[], arr2: number[]): boolean {
   return arr1.some((num) => arr2.includes(num));
 }
 
+function containsAllNumbers(arr1: number[], arr2: number[]): boolean {
+  return arr2.every((num) => arr1.includes(num));
+}
+
 export function combinations(total: number, size: number, inclusions: number[], exclusions: number[]) {
-  const validCombinations = killerCombinations.filter((n) => !containsNumbers(n, exclusions)).filter((arr) => arr.length === size && totalInArray(arr) === total);
+  const validCombinations = killerCombinations.filter((n) => !containsAnyNumbers(n, exclusions)).filter((arr) => arr.length === size && totalInArray(arr) === total);
 
   if (inclusions.length > 0) {
-    return validCombinations.filter((n) => containsNumbers(n, inclusions));
+    return validCombinations.filter((n) => containsAllNumbers(n, inclusions));
   }
 
   return validCombinations;
