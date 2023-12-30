@@ -19,9 +19,11 @@ export default function Combination(props: CombinationProps) {
             {combination.map((number, ii) => (
               <NumberTile num={number} key={`option-${i}-${ii}`} />
             ))}
-            {range(1, 9).filter((n) => !combination.includes(n)).map((number, ii) => (
-              <NumberTile num={number} key={`option-${i}-${ii}`} isDisabled={true} />
-            ))}
+            {range(1, 9)
+              .filter((n) => !combination.includes(n))
+              .map((number, ii) => (
+                <NumberTile num={number} key={`option-${i}-${ii}`} isDisabled={true} />
+              ))}
           </div>
         </div>
       ))}

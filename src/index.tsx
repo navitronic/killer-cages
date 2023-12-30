@@ -4,7 +4,7 @@ import './index.css';
 import { OuterApp } from './App';
 import reportWebVitals from './reportWebVitals';
 import { DisplayOptionsContext } from './context/DisplayOptionsContext';
-import {AppState, AppStateContext} from "./context/AppStateContext";
+import { AppState, AppStateContext } from './context/AppStateContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -14,25 +14,28 @@ interface AppProps {
 
 const App = ({ children }: AppProps) => {
   const [groupNum, setGroupNum] = useState<boolean>(false);
-  const [appState, setAppState] = useState<AppState>({ definitions: [{
-      total: 15,
-      size: 4,
-      inclusions: [],
-      exclusions: [],
-  }, {
-      total: 15,
-      size: 4,
-      inclusions: [],
-      exclusions: [],
-  }]})
+  const [appState, setAppState] = useState<AppState>({
+    definitions: [
+      {
+        total: 15,
+        size: 4,
+        inclusions: [],
+        exclusions: [],
+      },
+      {
+        total: 15,
+        size: 4,
+        inclusions: [],
+        exclusions: [],
+      },
+    ],
+  });
 
   return (
     <DisplayOptionsContext.Provider value={{ groupNum: groupNum, setGroupNum: setGroupNum }}>
-      <AppStateContext.Provider value={{ appState, setAppState }}>
-        {children}
-      </AppStateContext.Provider>
-    </DisplayOptionsContext.Provider>)
-    ;
+      <AppStateContext.Provider value={{ appState, setAppState }}>{children}</AppStateContext.Provider>
+    </DisplayOptionsContext.Provider>
+  );
 };
 
 root.render(

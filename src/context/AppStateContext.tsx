@@ -18,7 +18,7 @@ export interface AppContext {
 
 export const AppStateContext = createContext<AppContext>({
   appState: {
-    definitions: []
+    definitions: [],
   },
   setAppState: (value: AppState) => {},
 });

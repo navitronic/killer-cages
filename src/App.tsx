@@ -2,7 +2,7 @@ import React, { ChangeEvent, useContext, useState } from 'react';
 import { DisplayOptions, DisplayOptionsContext } from './context/DisplayOptionsContext';
 import CombinationRange from './ui/CombinationRange';
 import Combination from './ui/Combination';
-import {AppContext, AppStateContext} from "./context/AppStateContext";
+import { AppContext, AppStateContext } from './context/AppStateContext';
 
 function numStrToArr(excStr: string): number[] {
   return excStr
@@ -24,7 +24,13 @@ export function OuterApp() {
 
   const { definitions } = AppState.appState;
 
-  return (<>{definitions.map((d, i) => <InnerApp key={`definition-${i}`}/>)}</>);
+  return (
+    <>
+      {definitions.map((d, i) => (
+        <InnerApp key={`definition-${i}`} />
+      ))}
+    </>
+  );
 }
 
 export function InnerApp() {
