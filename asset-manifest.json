@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/killer-cages/static/css/main.223144af.css",
-    "main.js": "/killer-cages/static/js/main.fbca2028.js",
+    "main.js": "/killer-cages/static/js/main.2179c547.js",
     "static/js/787.4c5ab758.chunk.js": "/killer-cages/static/js/787.4c5ab758.chunk.js",
     "index.html": "/killer-cages/index.html",
     "main.223144af.css.map": "/killer-cages/static/css/main.223144af.css.map",
-    "main.fbca2028.js.map": "/killer-cages/static/js/main.fbca2028.js.map",
+    "main.2179c547.js.map": "/killer-cages/static/js/main.2179c547.js.map",
     "787.4c5ab758.chunk.js.map": "/killer-cages/static/js/787.4c5ab758.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.223144af.css",
-    "static/js/main.fbca2028.js"
+    "static/js/main.2179c547.js"
   ]
 }
