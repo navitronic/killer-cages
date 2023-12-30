@@ -21,13 +21,7 @@ const App = ({ children }: AppProps) => {
         size: 4,
         inclusions: [],
         exclusions: [],
-      },
-      {
-        total: 15,
-        size: 4,
-        inclusions: [],
-        exclusions: [],
-      },
+      }
     ],
   });
 
