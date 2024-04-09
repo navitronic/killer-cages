@@ -1,4 +1,4 @@
-import React, {ChangeEvent, HTMLProps, useContext, useState} from 'react';
+import React, { ChangeEvent, HTMLProps, useContext, useState } from 'react';
 import { DisplayOptions, DisplayOptionsContext } from './context/DisplayOptionsContext';
 import CombinationRange from './ui/CombinationRange';
 import Combination from './ui/Combination';
@@ -34,23 +34,20 @@ export function OuterApp() {
 }
 
 interface InputProps {
-  name: string,
-  value: string,
-  type: string,
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-  min?: number,
-  max?: number,
+  name: string;
+  value: string;
+  type: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  min?: number;
+  max?: number;
 }
-
 
 function Input(props: HTMLProps<HTMLInputElement>) {
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     e.target.select();
   };
 
-  return (
-    <input className="border-4 p-3 m-1 mr-4 rounded-xl font-bold" onFocus={handleFocus} {...props} />
-  );
+  return <input className="border-4 p-3 m-1 mr-4 rounded-xl font-bold" onFocus={handleFocus} {...props} />;
 }
 
 export function InnerApp() {
@@ -71,7 +68,7 @@ export function InnerApp() {
         <div>
           <label>
             Total:
-            <Input name={'total'} value={total.toString() ?? ''} type={'number'} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTotal(Number(e.target.value))}  max={45} min={1} />
+            <Input name={'total'} value={total.toString() ?? ''} type={'number'} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTotal(Number(e.target.value))} max={45} min={1} />
           </label>
           <label>
             Size:

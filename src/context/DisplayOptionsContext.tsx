@@ -2,6 +2,7 @@ import { createContext } from 'react';
 
 export interface DisplayOptions {
   groupNum: boolean;
+
   setGroupNum(value: boolean): void;
 }
 

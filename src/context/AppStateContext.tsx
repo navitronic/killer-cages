@@ -13,6 +13,7 @@ export interface AppState {
 
 export interface AppContext {
   appState: AppState;
+
   setAppState(value: AppState): void;
 }
 
