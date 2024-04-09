@@ -21,7 +21,7 @@ const App = ({ children }: AppProps) => {
         size: 4,
         inclusions: [],
         exclusions: [],
-      }
+      },
     ],
   });
 

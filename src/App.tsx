@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext, useState } from 'react';
+import React, {ChangeEvent, HTMLProps, useContext, useState} from 'react';
 import { DisplayOptions, DisplayOptionsContext } from './context/DisplayOptionsContext';
 import CombinationRange from './ui/CombinationRange';
 import Combination from './ui/Combination';
@@ -33,6 +33,26 @@ export function OuterApp() {
   );
 }
 
+interface InputProps {
+  name: string,
+  value: string,
+  type: string,
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  min?: number,
+  max?: number,
+}
+
+
+function Input(props: HTMLProps<HTMLInputElement>) {
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.select();
+  };
+
+  return (
+    <input className="border-4 p-3 m-1 mr-4 rounded-xl font-bold" onFocus={handleFocus} {...props} />
+  );
+}
+
 export function InnerApp() {
   const [total, setTotal] = useState<number>(10);
   const [size, setSize] = useState<number>(3);
@@ -51,19 +71,19 @@ export function InnerApp() {
         <div>
           <label>
             Total:
-            <input className="border-4 p-3 m-1 mr-4 rounded-xl font-bold" type="number" max={45} min={1} name={'total'} value={total ?? ''} onChange={(e) => setTotal(Number(e.target.value))} />
+            <Input name={'total'} value={total.toString() ?? ''} type={'number'} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTotal(Number(e.target.value))}  max={45} min={1} />
           </label>
           <label>
             Size:
-            <input className="border-4 p-3 m-1 mr-4 rounded-xl font-bold" type="number" max={9} min={1} name={'size'} value={size ?? ''} onChange={(e) => setSize(Number(e.target.value))} />
+            <Input type="number" max={9} min={1} name={'size'} value={size.toString() ?? ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSize(Number(e.target.value))} />
           </label>
           <label>
             Include:
-            <input size={6} className="border-4 p-3 m-1 mr-4 rounded-xl font-bold" type="text" name={'inclusions'} value={incStr ?? ''} onChange={(e) => setIncStr(e.target.value)} placeholder="Eg. 1 5" />
+            <Input size={6} type="text" name={'inclusions'} value={incStr ?? ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIncStr(e.target.value)} placeholder="Eg. 1 5" />
           </label>
           <label>
             Exclude:
-            <input size={6} className="border-4 p-3 m-1 mr-4 rounded-xl font-bold" type="text" name={'exclusions'} value={excStr ?? ''} onChange={(e) => setExcStr(e.target.value)} placeholder="Eg. 1 5" />
+            <Input size={6} type="text" name={'exclusions'} value={excStr ?? ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExcStr(e.target.value)} placeholder="Eg. 1 5" />
           </label>
         </div>
         <div className="text-base">
