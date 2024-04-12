@@ -1,4 +1,4 @@
-import { combinations, range } from '../utils';
+import { combinations, range } from '../lib/utils';
 import NumberTile from './NumberTile';
 import React from 'react';
 
