@@ -1,23 +1,8 @@
 import React, { ChangeEvent, HTMLProps, useContext, useState } from 'react';
 import { DisplayOptions, DisplayOptionsContext } from './context/DisplayOptionsContext';
-import CombinationRange from './ui/CombinationRange';
 import Combination from './ui/Combination';
 import { AppContext, AppStateContext } from './context/AppStateContext';
-
-function numStrToArr(excStr: string): number[] {
-  return excStr
-    .split(' ')
-    .map((n) => Number(n))
-    .filter((value) => value >= 1 && value <= 9);
-}
-
-function displayCombination(total: number, size: number, inclusions: number[], exclusions: number[], groupNum: boolean) {
-  if (!groupNum) {
-    return <CombinationRange total={total} size={size} inclusions={inclusions} exclusions={exclusions} />;
-  }
-
-  return <Combination total={total} size={size} inclusions={inclusions} exclusions={exclusions} />;
-}
+import { numStrToArr } from './utils';
 
 export function OuterApp() {
   const AppState: AppContext = useContext(AppStateContext);
@@ -31,15 +16,6 @@ export function OuterApp() {
       ))}
     </>
   );
-}
-
-interface InputProps {
-  name: string;
-  value: string;
-  type: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  min?: number;
-  max?: number;
 }
 
 function Input(props: HTMLProps<HTMLInputElement>) {
@@ -90,7 +66,7 @@ export function InnerApp() {
           </label>
         </div>
       </div>
-      {displayCombination(total, size, numStrToArr(incStr), numStrToArr(excStr), displayOptions.groupNum)}
+      <Combination group={displayOptions.groupNum} total={total} size={size} inclusions={numStrToArr(incStr)} exclusions={numStrToArr(excStr)} />;
     </div>
   );
 }

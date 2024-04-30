@@ -37,3 +37,10 @@ export function combinations(total: number, size: number, inclusions: number[], 
 
   return validCombinations;
 }
+
+export function numStrToArr(excStr: string): number[] {
+  return excStr
+    .split(' ')
+    .map((n) => Number(n))
+    .filter((value) => value >= 1 && value <= 9);
+}
