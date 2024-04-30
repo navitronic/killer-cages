@@ -2,7 +2,8 @@ import React, { ChangeEvent, HTMLProps, useContext, useState } from 'react';
 import { DisplayOptions, DisplayOptionsContext } from './context/DisplayOptionsContext';
 import CombinationRange from './ui/CombinationRange';
 import Combination from './ui/Combination';
-import { AppContext, AppStateContext } from './context/AppStateContext';
+import { AppContext, AppStateContext, CageDefinition } from './context/AppStateContext';
+import { useRenderInfo } from '@uidotdev/usehooks';
 
 function numStrToArr(excStr: string): number[] {
   return excStr
@@ -19,27 +20,18 @@ function displayCombination(total: number, size: number, inclusions: number[], e
   return <Combination total={total} size={size} inclusions={inclusions} exclusions={exclusions} />;
 }
 
-export function OuterApp() {
-  const AppState: AppContext = useContext(AppStateContext);
+export interface OuterAppProps {
+  definitions: CageDefinition[];
+}
 
-  const { definitions } = AppState.appState;
-
+export function OuterApp({ definitions }: OuterAppProps) {
   return (
     <>
       {definitions.map((d, i) => (
-        <InnerApp key={`definition-${i}`} />
+        <InnerApp key={`definition-${i}`} definition={d} />
       ))}
     </>
   );
-}
-
-interface InputProps {
-  name: string;
-  value: string;
-  type: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  min?: number;
-  max?: number;
 }
 
 function Input(props: HTMLProps<HTMLInputElement>) {
@@ -50,17 +42,19 @@ function Input(props: HTMLProps<HTMLInputElement>) {
   return <input className="border-4 p-3 m-1 mr-4 rounded-xl font-bold" onFocus={handleFocus} {...props} />;
 }
 
-export function InnerApp() {
-  const [total, setTotal] = useState<number>(10);
-  const [size, setSize] = useState<number>(3);
-  const [incStr, setIncStr] = useState<string>('');
-  const [excStr, setExcStr] = useState<string>('');
+interface CageProps {
+  definition: CageDefinition;
+}
+
+export function InnerApp({ definition }: CageProps) {
+  const info = useRenderInfo('InnerApp');
+
+  const [total, setTotal] = useState<number>(definition.total);
+  const [size, setSize] = useState<number>(definition.size);
+  const [incStr, setIncStr] = useState<string>(definition.inclusions.join(' '));
+  const [excStr, setExcStr] = useState<string>(definition.exclusions.join(' '));
 
   const displayOptions: DisplayOptions = useContext(DisplayOptionsContext);
-
-  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    displayOptions.setGroupNum(e.target.checked);
-  };
 
   return (
     <div className="auto px-10 my-10">
@@ -81,12 +75,6 @@ export function InnerApp() {
           <label>
             Exclude:
             <Input size={6} type="text" name={'exclusions'} value={excStr ?? ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExcStr(e.target.value)} placeholder="Eg. 1 5" />
-          </label>
-        </div>
-        <div className="text-base">
-          <label>
-            <input type="checkbox" checked={displayOptions.groupNum} onChange={handleCheckboxChange} className="mr-1" />
-            Group numbers
           </label>
         </div>
       </div>

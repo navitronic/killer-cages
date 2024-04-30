@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-interface CageDefinition {
+export interface CageDefinition {
   total: number;
   size: number;
   inclusions: number[];
