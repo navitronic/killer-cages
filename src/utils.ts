@@ -1,4 +1,4 @@
-import { killerCombinations } from './killlerCombinations';
+import { killerCombinations } from './killerCombinations';
 
 export function range(start: number, end: number): number[] {
   start = Math.floor(start);
