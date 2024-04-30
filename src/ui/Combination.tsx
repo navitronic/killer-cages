@@ -7,10 +7,26 @@ interface CombinationProps {
   size: number;
   inclusions: number[];
   exclusions: number[];
+  group: boolean;
 }
 
 export default function Combination(props: CombinationProps) {
-  const { total, size, inclusions, exclusions } = props;
+  const { total, size, inclusions, exclusions, group } = props;
+
+  if (!group) {
+    return (
+      <div>
+        {combinations(total, size, inclusions, exclusions).map((combination, i) => (
+          <div key={`options-${i}`}>
+            {range(1, 9).map((number, ii) => (
+              <NumberTile key={`option-${i}-${ii}`} num={number} isDisabled={!combination.includes(number)} />
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div>
       {combinations(total, size, inclusions, exclusions).map((combination, i) => (
