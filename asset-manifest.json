@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/killer-cages/static/css/main.223144af.css",
-    "main.js": "/killer-cages/static/js/main.2179c547.js",
-    "static/js/787.4c5ab758.chunk.js": "/killer-cages/static/js/787.4c5ab758.chunk.js",
+    "main.css": "/killer-cages/static/css/main.87d3d265.css",
+    "main.js": "/killer-cages/static/js/main.d1f8dbbf.js",
+    "static/js/453.6385b294.chunk.js": "/killer-cages/static/js/453.6385b294.chunk.js",
     "index.html": "/killer-cages/index.html",
-    "main.223144af.css.map": "/killer-cages/static/css/main.223144af.css.map",
-    "main.2179c547.js.map": "/killer-cages/static/js/main.2179c547.js.map",
-    "787.4c5ab758.chunk.js.map": "/killer-cages/static/js/787.4c5ab758.chunk.js.map"
+    "main.87d3d265.css.map": "/killer-cages/static/css/main.87d3d265.css.map",
+    "main.d1f8dbbf.js.map": "/killer-cages/static/js/main.d1f8dbbf.js.map",
+    "453.6385b294.chunk.js.map": "/killer-cages/static/js/453.6385b294.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.223144af.css",
-    "static/js/main.2179c547.js"
+    "static/css/main.87d3d265.css",
+    "static/js/main.d1f8dbbf.js"
   ]
 }
