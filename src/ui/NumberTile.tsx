@@ -5,11 +5,18 @@ interface NumberTileProps {
   isDisabled?: boolean;
 }
 
-const buttonClass = (color: string, textColor: string) => `text-center border-4 px-4 py-2 m-1 rounded-2xl font-bold text-2xl bg-${color}-300 border-${color}-200 text-${textColor}-400`;
+const buttonClass = (isDisabled: boolean) => {
+  let classNames = 'min-w-[64px] text-center border-4 px-4 py-2 m-1 rounded-2xl font-bold text-2xl';
 
-const NumberTile = ({ num, isDisabled }: NumberTileProps) => (
-  <button disabled={isDisabled} className={buttonClass(!isDisabled ? 'blue' : 'gray', !isDisabled ? 'black' : 'gray')}>
-    {num}
-  </button>
-);
+  if (isDisabled) {
+    classNames += ' bg-gray-300 border-gray-200 text-gray-400';
+  } else {
+    classNames += ' bg-blue-300 border-blue-200';
+  }
+
+  return classNames;
+};
+
+const NumberTile = ({ num, isDisabled }: NumberTileProps) => <button className={buttonClass(!!isDisabled)}>{num}</button>;
+
 export default NumberTile;

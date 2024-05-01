@@ -28,14 +28,22 @@ function containsAllNumbers(arr1: number[], arr2: number[]): boolean {
   return arr2.every((num) => arr1.includes(num));
 }
 
-export function combinations(total: number, size: number, inclusions: number[], exclusions: number[]) {
-  const validCombinations = killerCombinations.filter((n) => !containsAnyNumbers(n, exclusions)).filter((arr) => arr.length === size && totalInArray(arr) === total);
+export function validCombinations(total: number, size: number) {
+  return killerCombinations.filter((arr) => arr.length === size && totalInArray(arr) === total);
+}
 
-  if (inclusions.length > 0) {
-    return validCombinations.filter((n) => containsAllNumbers(n, inclusions));
+export function combinations(total: number, size: number, inclusions: number[], exclusions: number[]) {
+  let combinations = validCombinations(total, size);
+
+  if (exclusions.length > 0) {
+    combinations = combinations.filter((n) => !containsAnyNumbers(n, exclusions));
   }
 
-  return validCombinations;
+  if (inclusions.length > 0) {
+    combinations = combinations.filter((n) => containsAllNumbers(n, inclusions));
+  }
+
+  return combinations;
 }
 
 export function numStrToArr(excStr: string): number[] {
@@ -43,4 +51,16 @@ export function numStrToArr(excStr: string): number[] {
     .split(' ')
     .map((n) => Number(n))
     .filter((value) => value >= 1 && value <= 9);
+}
+
+export function ensureUniqueNumbers(arr: number[]): number[] {
+  const uniqueArray: number[] = [];
+
+  arr.forEach((num) => {
+    if (!uniqueArray.includes(num)) {
+      uniqueArray.push(num);
+    }
+  });
+
+  return uniqueArray;
 }
