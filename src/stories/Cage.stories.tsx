@@ -13,5 +13,6 @@ export const Default: Story = {
   args: {
     size: 3,
     total: 10,
+    exclusions: '',
   },
 };
