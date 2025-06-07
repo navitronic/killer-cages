@@ -1,4 +1,4 @@
-import { range, numStrToArr, ensureUniqueNumbers } from './utils';
+import { range, numStrToArr, ensureUniqueNumbers, combinations } from './utils';
 
 describe('range', () => {
   it('creates an increasing range', () => {
@@ -35,5 +35,15 @@ describe('ensureUniqueNumbers', () => {
 
   it('returns an empty array as-is', () => {
     expect(ensureUniqueNumbers([])).toEqual([]);
+  });
+});
+
+describe('combinations', () => {
+  it('filters combinations by inclusions', () => {
+    expect(combinations(5, 2, [1], [])).toEqual([[1, 4]]);
+  });
+
+  it('filters combinations by inclusions and exclusions', () => {
+    expect(combinations(5, 2, [1], [4])).toEqual([]);
   });
 });

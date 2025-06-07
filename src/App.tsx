@@ -17,6 +17,7 @@ export function InnerApp() {
   const [total, setTotal] = useState<number>(10);
   const [size, setSize] = useState<number>(3);
   const [exclusions, setExclusions] = useState<string>('');
+  const [inclusions, setInclusions] = useState<string>('');
 
   return (
     <div className="mx-auto px-10 my-10">
@@ -34,9 +35,13 @@ export function InnerApp() {
             Disallowed Numbers:
             <Input name={'exclusions'} value={exclusions} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExclusions(e.target.value)} placeholder="e.g. 1 2 3" />
           </label>
+          <label>
+            Required Numbers:
+            <Input name={'inclusions'} value={inclusions} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInclusions(e.target.value)} placeholder="e.g. 1 2" />
+          </label>
         </div>
       </div>
-      <Cage total={total} size={size} exclusions={exclusions} />
+      <Cage total={total} size={size} exclusions={exclusions} inclusions={inclusions} />
     </div>
   );
 }

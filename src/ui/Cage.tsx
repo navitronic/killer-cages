@@ -6,6 +6,7 @@ interface CageProps {
   total: number;
   size: number;
   exclusions?: string;
+  inclusions?: string;
 }
 
 function toggleIndex(indexes: number[], index: number): number[] {
@@ -20,9 +21,10 @@ function toggleIndex(indexes: number[], index: number): number[] {
   return [...indexes];
 }
 
-export default function Cage({ total, size, exclusions = '' }: CageProps) {
+export default function Cage({ total, size, exclusions = '', inclusions = '' }: CageProps) {
   const excludedNumbers = ensureUniqueNumbers(numStrToArr(exclusions));
-  const comboList = combinations(total, size, [], excludedNumbers);
+  const includedNumbers = ensureUniqueNumbers(numStrToArr(inclusions));
+  const comboList = combinations(total, size, includedNumbers, excludedNumbers);
 
   const [excludedIndexes, setExcludedIndexes] = useState<number[]>([]);
 
