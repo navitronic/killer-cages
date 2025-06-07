@@ -18,7 +18,7 @@ export function InnerApp() {
   const [size, setSize] = useState<number>(3);
 
   return (
-    <div className="auto px-10 my-10">
+    <div className="mx-auto px-10 my-10">
       <div className="text-2xl mb-20">
         <div>
           <label>
