@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { range, validCombinations } from '../utils';
+import { range, combinations, numStrToArr, ensureUniqueNumbers } from '../utils';
 import NumberTile from './NumberTile';
 
 interface CageProps {
   total: number;
   size: number;
+  exclusions?: string;
 }
 
 function toggleIndex(indexes: number[], index: number): number[] {
@@ -19,8 +20,9 @@ function toggleIndex(indexes: number[], index: number): number[] {
   return [...indexes];
 }
 
-export default function Cage({ total, size }: CageProps) {
-  const combinations = validCombinations(total, size);
+export default function Cage({ total, size, exclusions = '' }: CageProps) {
+  const excludedNumbers = ensureUniqueNumbers(numStrToArr(exclusions));
+  const comboList = combinations(total, size, [], excludedNumbers);
 
   const [excludedIndexes, setExcludedIndexes] = useState<number[]>([]);
 
@@ -34,7 +36,7 @@ export default function Cage({ total, size }: CageProps) {
         {size} cell, {total} cage
       </h2>
       <div>
-        {combinations.map((combination, i) => (
+        {comboList.map((combination, i) => (
           <div
             className={excludedIndexes.indexOf(i) > -1 ? 'opacity-20' : ''}
             key={`cage-option-${i}`}

@@ -16,6 +16,7 @@ function Input(props: HTMLProps<HTMLInputElement>) {
 export function InnerApp() {
   const [total, setTotal] = useState<number>(10);
   const [size, setSize] = useState<number>(3);
+  const [exclusions, setExclusions] = useState<string>('');
 
   return (
     <div className="auto px-10 my-10">
@@ -29,9 +30,13 @@ export function InnerApp() {
             Size:
             <Input type="number" max={9} min={1} name={'size'} value={size.toString() ?? ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSize(Number(e.target.value))} />
           </label>
+          <label>
+            Disallowed Numbers:
+            <Input name={'exclusions'} value={exclusions} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExclusions(e.target.value)} placeholder="e.g. 1 2 3" />
+          </label>
         </div>
       </div>
-      <Cage total={total} size={size} />
+      <Cage total={total} size={size} exclusions={exclusions} />
     </div>
   );
 }
