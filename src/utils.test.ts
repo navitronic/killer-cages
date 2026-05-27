@@ -1,4 +1,16 @@
+import { killerCombinations } from './killerCombinations';
 import { range, numStrToArr, ensureUniqueNumbers, combinations } from './utils';
+
+describe('killerCombinations', () => {
+  it('generates every non-empty combination of digits 1 through 9', () => {
+    const uniqueCombinations = new Set(killerCombinations.map((combination) => combination.join(',')));
+
+    expect(killerCombinations).toHaveLength(511);
+    expect(uniqueCombinations.size).toBe(511);
+    expect(killerCombinations[0]).toEqual([1]);
+    expect(killerCombinations).toContainEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  });
+});
 
 describe('range', () => {
   it('creates an increasing range', () => {
