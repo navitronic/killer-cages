@@ -12,7 +12,8 @@ interface CageProps {
 export default function Cage({ total, size, exclusions = '', inclusions = '' }: CageProps) {
   const excludedNumbers = ensureUniqueNumbers(numStrToArr(exclusions));
   const includedNumbers = ensureUniqueNumbers(numStrToArr(inclusions));
-  const comboList = combinations(total, size, includedNumbers, excludedNumbers);
+  const conflictingNumbers = includedNumbers.filter((number) => excludedNumbers.includes(number));
+  const comboList = conflictingNumbers.length > 0 ? [] : combinations(total, size, includedNumbers, excludedNumbers);
 
   const [excludedIndexes, setExcludedIndexes] = useState<number[]>([]);
 
@@ -25,6 +26,7 @@ export default function Cage({ total, size, exclusions = '', inclusions = '' }: 
       <h2 className="text-2xl font-bold my-5 px-3">
         {size} cell, {total} cage
       </h2>
+      {conflictingNumbers.length > 0 && <p className="px-3 text-red-700">Numbers cannot be both required and disallowed: {conflictingNumbers.join(', ')}</p>}
       <div>
         {comboList.map((combination, i) => (
           <div
