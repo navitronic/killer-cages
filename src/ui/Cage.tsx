@@ -28,7 +28,7 @@ export default function Cage({ total, size, exclusions = '', inclusions = '' }: 
       </h2>
       {conflictingNumbers.length > 0 && <p className="px-3 text-red-700">Numbers cannot be both required and disallowed: {conflictingNumbers.join(', ')}</p>}
       {comboList.length === 0 && conflictingNumbers.length === 0 && <p className="px-3">No combinations match these filters.</p>}
-      <div>
+      <div className="space-y-2 sm:space-y-3">
         {comboList.map((combination, i) => (
           <button
             aria-label={`Toggle combination ${combination.join(', ')}`}
