@@ -1,4 +1,5 @@
 import React, { HTMLProps, useState } from 'react';
+import { invalidNumberListValues } from './utils';
 import Cage from './ui/Cage';
 
 function Input(props: HTMLProps<HTMLInputElement>) {
@@ -23,36 +24,42 @@ export function InnerApp() {
   const parsedSize = Number(size);
   const totalError = total.trim() === '' || !Number.isInteger(parsedTotal) || parsedTotal < 1 || parsedTotal > 45 ? 'Total must be a whole number from 1 to 45.' : '';
   const sizeError = size.trim() === '' || !Number.isInteger(parsedSize) || parsedSize < 1 || parsedSize > 9 ? 'Size must be a whole number from 1 to 9.' : '';
+  const invalidExclusions = invalidNumberListValues(exclusions);
+  const invalidInclusions = invalidNumberListValues(inclusions);
+  const exclusionsError = invalidExclusions.length > 0 ? `Disallowed numbers must be digits from 1 to 9: ${invalidExclusions.join(', ')}.` : '';
+  const inclusionsError = invalidInclusions.length > 0 ? `Required numbers must be digits from 1 to 9: ${invalidInclusions.join(', ')}.` : '';
 
   return (
-    <div className="mx-auto px-10 my-10">
-      <div className="text-2xl mb-20">
-        <div>
-          <label>
+    <div className="mx-auto px-4 sm:px-10 my-10">
+      <div className="text-xl sm:text-2xl mb-10 sm:mb-20">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <label className="flex flex-col">
             Total:
             <Input name={'total'} value={total} type={'number'} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTotal(e.target.value)} max={45} min={1} />
           </label>
-          <label>
+          <label className="flex flex-col">
             Size:
             <Input type="number" max={9} min={1} name={'size'} value={size} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSize(e.target.value)} />
           </label>
-          <label>
-            Disallowed Numbers:
+          <label className="flex flex-col">
+            Disallowed:
             <Input name={'exclusions'} value={exclusions} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExclusions(e.target.value)} placeholder="e.g. 1 2 3" />
           </label>
-          <label>
-            Required Numbers:
+          <label className="flex flex-col">
+            Required:
             <Input name={'inclusions'} value={inclusions} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInclusions(e.target.value)} placeholder="e.g. 1 2" />
           </label>
         </div>
       </div>
-      {(totalError || sizeError) && (
+      {(totalError || sizeError || exclusionsError || inclusionsError) && (
         <div className="mb-5 px-3 text-red-700">
           {totalError && <p>{totalError}</p>}
           {sizeError && <p>{sizeError}</p>}
+          {exclusionsError && <p>{exclusionsError}</p>}
+          {inclusionsError && <p>{inclusionsError}</p>}
         </div>
       )}
-      {!totalError && !sizeError && <Cage total={parsedTotal} size={parsedSize} exclusions={exclusions} inclusions={inclusions} />}
+      {!totalError && !sizeError && !exclusionsError && !inclusionsError && <Cage total={parsedTotal} size={parsedSize} exclusions={exclusions} inclusions={inclusions} />}
     </div>
   );
 }

@@ -6,7 +6,7 @@ interface NumberTileProps {
 }
 
 const tileClass = (isDisabled: boolean) => {
-  let classNames = 'inline-block min-w-[64px] text-center border-4 px-4 py-2 m-1 rounded-2xl font-bold text-2xl';
+  let classNames = 'flex-1 text-center border-4 px-1 sm:px-2 py-1 sm:py-2 rounded-xl sm:rounded-2xl font-bold text-lg sm:text-2xl';
 
   if (isDisabled) {
     classNames += ' bg-gray-300 border-gray-200 text-gray-400';

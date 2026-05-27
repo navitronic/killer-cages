@@ -27,12 +27,13 @@ export default function Cage({ total, size, exclusions = '', inclusions = '' }: 
         {size} cell, {total} cage
       </h2>
       {conflictingNumbers.length > 0 && <p className="px-3 text-red-700">Numbers cannot be both required and disallowed: {conflictingNumbers.join(', ')}</p>}
-      <div>
+      {comboList.length === 0 && conflictingNumbers.length === 0 && <p className="px-3">No combinations match these filters.</p>}
+      <div className="space-y-2 sm:space-y-3">
         {comboList.map((combination, i) => (
           <button
             aria-label={`Toggle combination ${combination.join(', ')}`}
             aria-pressed={excludedIndexes.indexOf(i) > -1}
-            className={excludedIndexes.indexOf(i) > -1 ? 'block opacity-20' : 'block'}
+            className={excludedIndexes.indexOf(i) > -1 ? 'flex w-full gap-0.5 sm:gap-1 rounded-xl opacity-20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-600' : 'flex w-full gap-0.5 sm:gap-1 rounded-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-600'}
             key={`cage-option-${i}`}
             onClick={() => {
               setExcludedIndexes((indexes) => (indexes.includes(i) ? indexes.filter((index) => index !== i) : [...indexes, i]));

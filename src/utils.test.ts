@@ -1,5 +1,5 @@
 import { killerCombinations } from './killerCombinations';
-import { range, numStrToArr, ensureUniqueNumbers, combinations } from './utils';
+import { range, numStrToArr, ensureUniqueNumbers, combinations, invalidNumberListValues } from './utils';
 
 describe('killerCombinations', () => {
   it('generates every non-empty combination of digits 1 through 9', () => {
@@ -41,6 +41,16 @@ describe('numStrToArr', () => {
 
   it('accepts commas and repeated whitespace as separators', () => {
     expect(numStrToArr('1, 2\t3\n4')).toEqual([1, 2, 3, 4]);
+  });
+});
+
+describe('invalidNumberListValues', () => {
+  it('returns invalid tokens from a number list', () => {
+    expect(invalidNumberListValues('1 10 a 0 9')).toEqual(['10', 'a', '0']);
+  });
+
+  it('accepts empty strings and digits from 1 to 9', () => {
+    expect(invalidNumberListValues('1, 2 9')).toEqual([]);
   });
 });
 
