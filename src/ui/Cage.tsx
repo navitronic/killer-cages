@@ -33,7 +33,7 @@ export default function Cage({ total, size, exclusions = '', inclusions = '' }: 
           <button
             aria-label={`Toggle combination ${combination.join(', ')}`}
             aria-pressed={excludedIndexes.indexOf(i) > -1}
-            className={excludedIndexes.indexOf(i) > -1 ? 'block opacity-20' : 'block'}
+            className={excludedIndexes.indexOf(i) > -1 ? 'block rounded-xl opacity-20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-600' : 'block rounded-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-600'}
             key={`cage-option-${i}`}
             onClick={() => {
               setExcludedIndexes((indexes) => (indexes.includes(i) ? indexes.filter((index) => index !== i) : [...indexes, i]));
