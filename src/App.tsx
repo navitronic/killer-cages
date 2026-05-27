@@ -1,4 +1,5 @@
 import React, { HTMLProps, useState } from 'react';
+import { invalidNumberListValues } from './utils';
 import Cage from './ui/Cage';
 
 function Input(props: HTMLProps<HTMLInputElement>) {
@@ -23,6 +24,10 @@ export function InnerApp() {
   const parsedSize = Number(size);
   const totalError = total.trim() === '' || !Number.isInteger(parsedTotal) || parsedTotal < 1 || parsedTotal > 45 ? 'Total must be a whole number from 1 to 45.' : '';
   const sizeError = size.trim() === '' || !Number.isInteger(parsedSize) || parsedSize < 1 || parsedSize > 9 ? 'Size must be a whole number from 1 to 9.' : '';
+  const invalidExclusions = invalidNumberListValues(exclusions);
+  const invalidInclusions = invalidNumberListValues(inclusions);
+  const exclusionsError = invalidExclusions.length > 0 ? `Disallowed numbers must be digits from 1 to 9: ${invalidExclusions.join(', ')}.` : '';
+  const inclusionsError = invalidInclusions.length > 0 ? `Required numbers must be digits from 1 to 9: ${invalidInclusions.join(', ')}.` : '';
 
   return (
     <div className="mx-auto px-10 my-10">
@@ -46,13 +51,15 @@ export function InnerApp() {
           </label>
         </div>
       </div>
-      {(totalError || sizeError) && (
+      {(totalError || sizeError || exclusionsError || inclusionsError) && (
         <div className="mb-5 px-3 text-red-700">
           {totalError && <p>{totalError}</p>}
           {sizeError && <p>{sizeError}</p>}
+          {exclusionsError && <p>{exclusionsError}</p>}
+          {inclusionsError && <p>{inclusionsError}</p>}
         </div>
       )}
-      {!totalError && !sizeError && <Cage total={parsedTotal} size={parsedSize} exclusions={exclusions} inclusions={inclusions} />}
+      {!totalError && !sizeError && !exclusionsError && !inclusionsError && <Cage total={parsedTotal} size={parsedSize} exclusions={exclusions} inclusions={inclusions} />}
     </div>
   );
 }

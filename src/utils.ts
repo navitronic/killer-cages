@@ -53,6 +53,13 @@ export function numStrToArr(excStr: string): number[] {
     .filter((value) => value >= 1 && value <= 9);
 }
 
+export function invalidNumberListValues(numberList: string): string[] {
+  return numberList
+    .split(/[\s,]+/)
+    .filter(Boolean)
+    .filter((value) => !/^[1-9]$/.test(value));
+}
+
 export function ensureUniqueNumbers(arr: number[]): number[] {
   const uniqueArray: number[] = [];
 

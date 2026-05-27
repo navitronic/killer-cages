@@ -23,6 +23,17 @@ describe('InnerApp', () => {
     expect(screen.getByRole('button', { name: 'Toggle combination 1, 4, 5' })).toBeInTheDocument();
   });
 
+  it('shows validation errors for invalid required and disallowed numbers', async () => {
+    render(<InnerApp />);
+
+    await userEvent.type(screen.getByLabelText(/Disallowed Numbers/i), '10 a');
+    await userEvent.type(screen.getByLabelText(/Required Numbers/i), '0');
+
+    expect(screen.getByText('Disallowed numbers must be digits from 1 to 9: 10, a.')).toBeInTheDocument();
+    expect(screen.getByText('Required numbers must be digits from 1 to 9: 0.')).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /cage$/i })).not.toBeInTheDocument();
+  });
+
   it('shows validation errors for total and size', async () => {
     render(<InnerApp />);
 
