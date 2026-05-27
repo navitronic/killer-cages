@@ -23,6 +23,14 @@ describe('InnerApp', () => {
     expect(screen.getByRole('button', { name: 'Toggle combination 1, 4, 5' })).toBeInTheDocument();
   });
 
+  it('shows an empty state when no combinations match', async () => {
+    render(<InnerApp />);
+
+    await userEvent.type(screen.getByLabelText(/Required Numbers/i), '9');
+
+    expect(screen.getByText('No combinations match these filters.')).toBeInTheDocument();
+  });
+
   it('shows validation errors for invalid required and disallowed numbers', async () => {
     render(<InnerApp />);
 

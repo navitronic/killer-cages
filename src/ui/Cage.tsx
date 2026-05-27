@@ -27,6 +27,7 @@ export default function Cage({ total, size, exclusions = '', inclusions = '' }: 
         {size} cell, {total} cage
       </h2>
       {conflictingNumbers.length > 0 && <p className="px-3 text-red-700">Numbers cannot be both required and disallowed: {conflictingNumbers.join(', ')}</p>}
+      {comboList.length === 0 && conflictingNumbers.length === 0 && <p className="px-3">No combinations match these filters.</p>}
       <div>
         {comboList.map((combination, i) => (
           <button
