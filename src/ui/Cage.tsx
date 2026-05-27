@@ -29,17 +29,20 @@ export default function Cage({ total, size, exclusions = '', inclusions = '' }: 
       {conflictingNumbers.length > 0 && <p className="px-3 text-red-700">Numbers cannot be both required and disallowed: {conflictingNumbers.join(', ')}</p>}
       <div>
         {comboList.map((combination, i) => (
-          <div
-            className={excludedIndexes.indexOf(i) > -1 ? 'opacity-20' : ''}
+          <button
+            aria-label={`Toggle combination ${combination.join(', ')}`}
+            aria-pressed={excludedIndexes.indexOf(i) > -1}
+            className={excludedIndexes.indexOf(i) > -1 ? 'block opacity-20' : 'block'}
             key={`cage-option-${i}`}
             onClick={() => {
               setExcludedIndexes((indexes) => (indexes.includes(i) ? indexes.filter((index) => index !== i) : [...indexes, i]));
             }}
+            type="button"
           >
             {range(1, 9).map((number, ii) => (
               <NumberTile key={`option-${i}-${ii}`} num={number} isDisabled={!combination.includes(number)} />
             ))}
-          </div>
+          </button>
         ))}
       </div>
     </>
