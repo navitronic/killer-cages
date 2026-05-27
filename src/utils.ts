@@ -48,7 +48,7 @@ export function combinations(total: number, size: number, inclusions: number[], 
 
 export function numStrToArr(excStr: string): number[] {
   return excStr
-    .split(' ')
+    .split(/[\s,]+/)
     .map((n) => Number(n))
     .filter((value) => value >= 1 && value <= 9);
 }
