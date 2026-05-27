@@ -30,7 +30,7 @@ export default function Cage({ total, size, exclusions = '', inclusions = '' }: 
 
   useEffect(() => {
     setExcludedIndexes([]);
-  }, [total, size]);
+  }, [total, size, inclusions, exclusions]);
 
   return (
     <>
