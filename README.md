@@ -26,7 +26,7 @@ npm audit --audit-level=moderate
 npm run deploy
 ```
 
-This builds the app and publishes the `build` directory to GitHub Pages. Generated `build` and `storybook-static` output is ignored and should not be committed.
+The app is served from `https://navitronic.github.io/killer-cages`, so Vite uses `base: '/killer-cages/'`. Pushing to `main` also runs the GitHub Pages workflow, which builds and publishes the `build` directory. Generated `build` and `storybook-static` output is ignored and should not be committed.
 
 ## Input examples
 
