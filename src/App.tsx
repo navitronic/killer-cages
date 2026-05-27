@@ -30,22 +30,22 @@ export function InnerApp() {
   const inclusionsError = invalidInclusions.length > 0 ? `Required numbers must be digits from 1 to 9: ${invalidInclusions.join(', ')}.` : '';
 
   return (
-    <div className="mx-auto px-10 my-10">
-      <div className="text-2xl mb-20">
-        <div>
-          <label>
+    <div className="mx-auto px-4 sm:px-10 my-10">
+      <div className="text-xl sm:text-2xl mb-10 sm:mb-20">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <label className="flex flex-col">
             Total:
             <Input name={'total'} value={total} type={'number'} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTotal(e.target.value)} max={45} min={1} />
           </label>
-          <label>
+          <label className="flex flex-col">
             Size:
             <Input type="number" max={9} min={1} name={'size'} value={size} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSize(e.target.value)} />
           </label>
-          <label>
+          <label className="flex flex-col">
             Disallowed Numbers:
             <Input name={'exclusions'} value={exclusions} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExclusions(e.target.value)} placeholder="e.g. 1 2 3" />
           </label>
-          <label>
+          <label className="flex flex-col">
             Required Numbers:
             <Input name={'inclusions'} value={inclusions} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInclusions(e.target.value)} placeholder="e.g. 1 2" />
           </label>
