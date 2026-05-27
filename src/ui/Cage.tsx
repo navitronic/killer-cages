@@ -9,18 +9,6 @@ interface CageProps {
   inclusions?: string;
 }
 
-function toggleIndex(indexes: number[], index: number): number[] {
-  const existingIndex = indexes.indexOf(index);
-
-  if (existingIndex > -1) {
-    indexes.splice(existingIndex, 1);
-  } else {
-    indexes.push(index);
-  }
-
-  return [...indexes];
-}
-
 export default function Cage({ total, size, exclusions = '', inclusions = '' }: CageProps) {
   const excludedNumbers = ensureUniqueNumbers(numStrToArr(exclusions));
   const includedNumbers = ensureUniqueNumbers(numStrToArr(inclusions));
@@ -43,7 +31,7 @@ export default function Cage({ total, size, exclusions = '', inclusions = '' }: 
             className={excludedIndexes.indexOf(i) > -1 ? 'opacity-20' : ''}
             key={`cage-option-${i}`}
             onClick={() => {
-              setExcludedIndexes(toggleIndex(excludedIndexes, i));
+              setExcludedIndexes((indexes) => (indexes.includes(i) ? indexes.filter((index) => index !== i) : [...indexes, i]));
             }}
           >
             {range(1, 9).map((number, ii) => (
