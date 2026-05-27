@@ -14,10 +14,15 @@ function Input(props: HTMLProps<HTMLInputElement>) {
 }
 
 export function InnerApp() {
-  const [total, setTotal] = useState<number>(10);
-  const [size, setSize] = useState<number>(3);
+  const [total, setTotal] = useState<string>('10');
+  const [size, setSize] = useState<string>('3');
   const [exclusions, setExclusions] = useState<string>('');
   const [inclusions, setInclusions] = useState<string>('');
+
+  const parsedTotal = Number(total);
+  const parsedSize = Number(size);
+  const totalError = total.trim() === '' || !Number.isInteger(parsedTotal) || parsedTotal < 1 || parsedTotal > 45 ? 'Total must be a whole number from 1 to 45.' : '';
+  const sizeError = size.trim() === '' || !Number.isInteger(parsedSize) || parsedSize < 1 || parsedSize > 9 ? 'Size must be a whole number from 1 to 9.' : '';
 
   return (
     <div className="mx-auto px-10 my-10">
@@ -25,11 +30,11 @@ export function InnerApp() {
         <div>
           <label>
             Total:
-            <Input name={'total'} value={total.toString() ?? ''} type={'number'} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTotal(Number(e.target.value))} max={45} min={1} />
+            <Input name={'total'} value={total} type={'number'} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTotal(e.target.value)} max={45} min={1} />
           </label>
           <label>
             Size:
-            <Input type="number" max={9} min={1} name={'size'} value={size.toString() ?? ''} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSize(Number(e.target.value))} />
+            <Input type="number" max={9} min={1} name={'size'} value={size} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSize(e.target.value)} />
           </label>
           <label>
             Disallowed Numbers:
@@ -41,7 +46,13 @@ export function InnerApp() {
           </label>
         </div>
       </div>
-      <Cage total={total} size={size} exclusions={exclusions} inclusions={inclusions} />
+      {(totalError || sizeError) && (
+        <div className="mb-5 px-3 text-red-700">
+          {totalError && <p>{totalError}</p>}
+          {sizeError && <p>{sizeError}</p>}
+        </div>
+      )}
+      {!totalError && !sizeError && <Cage total={parsedTotal} size={parsedSize} exclusions={exclusions} inclusions={inclusions} />}
     </div>
   );
 }
