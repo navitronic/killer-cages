@@ -15,8 +15,8 @@ describe('InnerApp', () => {
   it('filters combinations by required and disallowed numbers', async () => {
     render(<InnerApp />);
 
-    await userEvent.type(screen.getByLabelText(/Disallowed Numbers/i), '7');
-    await userEvent.type(screen.getByLabelText(/Required Numbers/i), '1');
+    await userEvent.type(screen.getByLabelText(/Disallowed/i), '7');
+    await userEvent.type(screen.getByLabelText(/Required/i), '1');
 
     expect(screen.queryByRole('button', { name: 'Toggle combination 1, 2, 7' })).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Toggle combination 1, 3, 6' })).toBeInTheDocument();
@@ -26,7 +26,7 @@ describe('InnerApp', () => {
   it('shows an empty state when no combinations match', async () => {
     render(<InnerApp />);
 
-    await userEvent.type(screen.getByLabelText(/Required Numbers/i), '9');
+    await userEvent.type(screen.getByLabelText(/Required/i), '9');
 
     expect(screen.getByText('No combinations match these filters.')).toBeInTheDocument();
   });
@@ -34,8 +34,8 @@ describe('InnerApp', () => {
   it('shows validation errors for invalid required and disallowed numbers', async () => {
     render(<InnerApp />);
 
-    await userEvent.type(screen.getByLabelText(/Disallowed Numbers/i), '10 a');
-    await userEvent.type(screen.getByLabelText(/Required Numbers/i), '0');
+    await userEvent.type(screen.getByLabelText(/Disallowed/i), '10 a');
+    await userEvent.type(screen.getByLabelText(/Required/i), '0');
 
     expect(screen.getByText('Disallowed numbers must be digits from 1 to 9: 10, a.')).toBeInTheDocument();
     expect(screen.getByText('Required numbers must be digits from 1 to 9: 0.')).toBeInTheDocument();

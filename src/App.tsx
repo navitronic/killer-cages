@@ -42,11 +42,11 @@ export function InnerApp() {
             <Input type="number" max={9} min={1} name={'size'} value={size} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSize(e.target.value)} />
           </label>
           <label className="flex flex-col">
-            Disallowed Numbers:
+            Disallowed:
             <Input name={'exclusions'} value={exclusions} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExclusions(e.target.value)} placeholder="e.g. 1 2 3" />
           </label>
           <label className="flex flex-col">
-            Required Numbers:
+            Required:
             <Input name={'inclusions'} value={inclusions} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInclusions(e.target.value)} placeholder="e.g. 1 2" />
           </label>
         </div>
